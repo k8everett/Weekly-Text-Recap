@@ -3,5 +3,5 @@ This program analyzes an iMessage user's chat database for messages in a given g
 
 # Required Files
 - contacts.csv: A CSV file containing the contact info of the group chat members with the following columns filled in for each person: first_name, last_name, phone_number, email, chat_name
-- login.env: USER_NAME=your.email@gmail.com
+- login.env: USER_NAME=your.email@gmail.com\
              PASSWORD=yourPassword
