@@ -128,7 +128,8 @@ class Email:
         return None
 
     def _pyramid(self):
-        """Create a ranking of group members from most to least texts.
+        """Create a ranking of group members from most to least texts. Ranking is based on messages without
+        attachments and that weren't reactions.
 
         Returns:
             String: formatted text
