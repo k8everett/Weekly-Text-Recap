@@ -41,9 +41,17 @@ class Controller:
             sys.exit(1)
 
     def start(self):
+        """Filter messages from the previous week and send the email update.
+
+        """
         # Update weekly_messages database
         filtered_messages = WeeklyTexts(self._chat_db, self._message_db).filter_messages()
 
-        # Format email with highlights from the week's messages
-        Email(filtered_messages, self._contacts)
+        # Format and send email with highlights from the week's messages
+        email_msg = Email(filtered_messages, self._contacts)
+        email_msg.send_email()
+
+
+
+
 

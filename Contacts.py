@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 CONTACTS_CSV = "contacts.csv"
 
@@ -46,7 +45,7 @@ class Contacts:
 
         # Phone number of the chat.db being searched
         owner = pd.read_sql_query("SELECT destination_caller_id FROM message", self._chat_db).dropna()
-        unique_vals = np.unique(owner)
+        unique_vals = owner.at[owner.size - 1, "destination_caller_id"]
         self._contacts.insert(len(self._contacts.columns), "handle_id", 0)
 
         # Iterate through all the contacts to find their handle id.

@@ -1,4 +1,3 @@
-from copy import deepcopy
 from datetime import datetime, timedelta, timezone, date
 
 from Contacts import CONTACTS_CSV
@@ -47,14 +46,14 @@ class WeeklyTexts:
 
         # Filter messages for the group chat and current week
         current_messages_df = self._messages.query("cache_roomnames == @group_name & @converted_prev_week <= date "
-                                                     "& date <= @converted_today", False)
+                                                     "& date <= @converted_today & text.notnull()", False)
 
         # Attach contact info to the messages
         current_week_df = current_messages_df.join(contact_df.set_index("handle_id"), on="handle_id", lsuffix="_l",
                                                    how="left")
 
         # Update message database with new table for this week's messages
-        current_week_df.to_sql("week_of_{}".format(date.today()), self._message_db, if_exists="replace")
+        current_week_df.to_sql("week_of_{}".format(date.today() - timedelta(weeks=1)), self._message_db, if_exists="replace")
 
         return current_week_df.copy()
 
